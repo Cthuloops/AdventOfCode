@@ -97,7 +97,7 @@ public class day1part1 {
         
         int total = 0;
         try {
-            File text = new File("text.txt");
+            File text = new File("../file.txt");
             Scanner scnr = new Scanner(text);
             String nextLine = "";
             while (scnr.hasNextLine()) {
