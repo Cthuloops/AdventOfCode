@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class day1part1 {
 
     /**
-     * Takes the ASCII reprentation from the sum method and returns the digit.
+     * Takes the ASCII reprentation from the twoDigitConversion method and returns the digit.
      *
      * @param asciiNumber The ASCII number returned by the .charAt method
      * @return digit
