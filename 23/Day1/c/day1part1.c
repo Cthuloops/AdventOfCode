@@ -3,7 +3,6 @@
 #include <stdbool.h>
 
 int asciiConversion(int asciiNumber) {
-    int numToConvert = asciiNumber;
     int convertedNum;
 
     switch (numToConvert) {
@@ -44,24 +43,24 @@ int asciiConversion(int asciiNumber) {
 
 int twoDigitConversion(char nextLine[]) {
     const int LENGTH = strlen(nextLine);
-    int num1 = 0, num2 = 0, twoDigit = 0;
-    bool num1found = false, num2found = false;
+    int digit1 = 0, digit2 = 0, twoDigit = 0;
+    bool digit1found = false, digit2found = false;
 
     for (int i = 0; i < LENGTH; i++) {
         if (nextLine[i] >= 48 && nextLine[i] <= 57) {
-            if (!num1found) {
-                num1 = asciiConversion(nextLine[i]);
-                num1found = true;
-            } else if (nextLine[i] >= 48 && nextLine[i] <= 57 && num1found) {
-                num2 = asciiConversion(nextLine[i]);
-                num2found = true;
+            if (!digit1found) {
+                digit1 = asciiConversion(nextLine[i]);
+                digit1found = true;
+            } else if (nextLine[i] >= 48 && nextLine[i] <= 57 && digit1found) {
+                digit2 = asciiConversion(nextLine[i]);
+                digit2found = true;
             }
         }
     }
-    if (num1found && !num2found) {
-        num2 = num1;
+    if (digit1found && !digit2found) {
+        digit2 = digit1;
     }
-    twoDigit = (num1 * 10) + num2;
+    twoDigit = (digit1 * 10) + digit2;
     return twoDigit;
 }
 
@@ -69,14 +68,14 @@ int twoDigitConversion(char nextLine[]) {
 int main() {
     
     int total = 0;
-    char nextLine[30];
+    char nextLine[61];
 
     //open file pointer to text file containing information
     FILE *fptr;    
     fptr = fopen("../file.txt", "r");
 
     if (fptr != NULL) {
-        while(fgets(nextLine, 30, fptr)) {
+        while(fgets(nextLine, 61, fptr)) {
             total += twoDigitConversion(nextLine);
         }
     } else {
