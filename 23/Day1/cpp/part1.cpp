@@ -38,8 +38,7 @@ int main() {
     int total = 0;
     while (getline(File, Line)) {
         string* pLine = &Line;
-        int num = extractNumber(pLine);
-        total += num;
+        total += extractNumber(pLine);
     }
     File.close();
     cout << total << endl;
