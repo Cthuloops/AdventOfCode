@@ -7,7 +7,7 @@
 using std::cout, std::endl, std::string, std::unordered_map;
 
 
-void replaceWords(string* pLine) {
+void insertNumbers(string* pLine) {
     unordered_map<string, char> words;
     words.emplace("zero", '0');
     words.emplace("one", '1');
@@ -60,7 +60,7 @@ int main() {
     int total = 0;
     while (getline(File, Line)) {
         string* pLine = &Line;
-        replaceWords(pLine);
+        insertNumbers(pLine);
         int num = extractNumber(pLine);
         total += num;
     }
