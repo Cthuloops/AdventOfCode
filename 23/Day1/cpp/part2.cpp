@@ -1,10 +1,32 @@
 #include <cctype>
 #include <iostream>
+#include <unordered_map>
 #include <fstream>
 #include <string>
 
-using std::cout, std::endl, std::string;
+using std::cout, std::endl, std::string, std::unordered_map;
 
+
+void replaceWords(string* pLine) {
+    unordered_map<string, char> words;
+    words.emplace("zero", '0');
+    words.emplace("one", '1');
+    words.emplace("two", '2');
+    words.emplace("three", '3');
+    words.emplace("four", '4');
+    words.emplace("five", '5');
+    words.emplace("six", '6');
+    words.emplace("seven", '7');
+    words.emplace("eight", '8');
+    words.emplace("nine", '9');
+    for (auto wordsIter = words.begin(); wordsIter != words.end(); ++wordsIter) {
+        int index = pLine->find(wordsIter->first);
+        while (index != -1) {
+            pLine->insert(index + 1, 1, wordsIter->second);
+            index = pLine->find(wordsIter->first);
+        }
+    }
+}
 
 int extractNumber(string* pLine) {
     int firstDigit, secondDigit;
@@ -38,6 +60,7 @@ int main() {
     int total = 0;
     while (getline(File, Line)) {
         string* pLine = &Line;
+        replaceWords(pLine);
         int num = extractNumber(pLine);
         total += num;
     }
