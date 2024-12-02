@@ -1,4 +1,4 @@
-#! usr/bin/env python
+#!/usr/bin/env python
 
 def part1(left, right):
     total = 0
