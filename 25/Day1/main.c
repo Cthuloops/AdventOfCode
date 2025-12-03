@@ -6,7 +6,7 @@ int main(void) {
     const char *filename = "input.txt";
 
     FILE *fp = fopen(filename, "r");
-    if (fp == NULL) {
+    if (!fp) {
         fprintf(stderr, "Couldn't open %s.\n", filename);
         exit(EXIT_FAILURE);
     }
@@ -23,25 +23,16 @@ int main(void) {
     int password = 0;
 
     int clicks;
-    int direction;
+    int left;
     while (fgets(buf, 6, fp)) {
-        // printf("Dial: %d\n", dial);
-        // printf("%s", buf);
-        direction = buf[0] == 'L';
-        buf[0] = '0';  // Overwrite with 0 so atoi can process the number.
-        clicks = atoi(buf);
-        clicks %= 100;
+        left = buf[0] == 'L';
+        clicks = atoi(&buf[1]);
 
-        if (direction) {
-            dial -= clicks;
-            if (dial < 0) {
-                dial += 100;
-            }
-        } else {
-            dial += clicks;
-            if (dial > 99) {
-                dial -= 100;
-            }
+        dial += (clicks % 100) * (left ? -1 : 1);
+        if (dial < 0) {
+            dial += 100;
+        } else if (dial > 99) {
+            dial -= 100;
         }
 
         if (dial == 0) {
