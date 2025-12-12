@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-// #define EXAMPLE
+#define EXAMPLE
 
 #ifdef EXAMPLE
 #define filename "../example.txt"
@@ -22,6 +22,10 @@ struct Range {
     u64 max;
 };
 
+void part1(struct Range ranges[ranges_size], int ranges_count,
+           char buf[bufsize], FILE *fp);
+void part2(void);
+
 
 int main(void) {
 
@@ -38,8 +42,6 @@ int main(void) {
     char *mid;
     u64 num1, num2;
     int i;
-    bool in_range;
-    int total_fresh = 0;
     while (fgets(buf, bufsize, fp)) {
         // Only half the file is used for ranges. After the \n line there's the
         // actual input for the challenge.
@@ -56,6 +58,19 @@ int main(void) {
         };
     }
 
+    fclose(fp);
+
+    return 0;
+}
+
+
+void part1(struct Range ranges[ranges_size], int ranges_count,
+           char buf[bufsize], FILE *fp) {
+
+    bool in_range;
+    int total_fresh = 0;
+    int i;
+    u64 num1;
     // Check to see if the numbers are within a valid range.
     while (fgets(buf, bufsize, fp)) {
         in_range = false;
@@ -66,10 +81,8 @@ int main(void) {
                 break;
             }
         }
-        total_fresh += (in_range * 1);
+        total_fresh += in_range;
     }
-
-    fclose(fp);
 
     printf("Total: %d\n", total_fresh);
 
